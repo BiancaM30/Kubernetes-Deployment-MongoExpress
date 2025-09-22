@@ -1,6 +1,11 @@
 # MongoDB and Mongo Express on Kubernetes (Minikube)
 
-Spin up a local **MongoDB** database and **Mongo Express** UI on **Kubernetes** using **Minikube**, **Docker**, and **kubectl**.  
+Spin up a local **MongoDB** database and **Mongo Express** UI on **Kubernetes** using **Minikube**, **Docker**, and **kubectl**.
+
+The setup has two pods and two services. Your browser reaches the **Mongo Express external service** (via `minikube service` or `kubectl port-forward`), which routes traffic to the **mongo-express pod** (UI on port 8081). From there, mongo-express talks to MongoDB through the **internal ClusterIP service** (`mongodb-service:27017`) that provides a stable address for the **mongodb pod**. Both pods read the DB admin **username/password** from the **`mongodb-secret`**.
+
+
+![Architecture diagram](./Diagram.png)
 
 ---
 
